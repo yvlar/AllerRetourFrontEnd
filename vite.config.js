@@ -32,7 +32,17 @@ export default defineConfig({
         branches: 70,
         statements: 70,
       },
-      exclude: ['src/shared/constants/**', 'src/**/*.test.{js,jsx}', 'tests/**'],
+      exclude: [
+        'src/shared/constants/**',
+        'src/shared/types/**',
+        'src/**/*.test.{js,jsx,ts,tsx}',
+        'src/**/index.{js,ts}',
+        'src/**/mock*.{js,ts}',
+        'src/main.jsx',
+        'tests/**',
+        'eslint.config.js',
+        'vite.config.js',
+      ],
     },
   },
 });
