@@ -1,5 +1,5 @@
 # 🚌 AllerRetour — Frontend
-
+![CI](https://github.com/yvlar/allerretour-frontend/actions/workflows/ci.yml/badge.svg)
 ![CI](https://github.com/yvlar/allerretour-frontend/actions/workflows/ci.yml/badge.svg)
 ![Tests](https://img.shields.io/badge/tests-passing-brightgreen)
 ![Coverage](https://img.shields.io/badge/coverage-70%25-green)
