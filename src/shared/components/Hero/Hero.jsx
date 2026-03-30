@@ -16,7 +16,7 @@ export function Hero({ onSearch }) {
   const handleSearch = () => onSearch({ depart, destination, jours });
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter') handleSearch();
+    if (e.key === 'Enter') { handleSearch(); }
   };
 
   return (

@@ -14,15 +14,15 @@ export function AuthModal({ mode, onClose, onLogin, onRegister }) {
 
   const validate = () => {
     const e = {};
-    if (!form.email) e.email = 'Courriel requis';
-    if (!form.motDePasse || form.motDePasse.length < 6) e.motDePasse = 'Minimum 6 caractères';
-    if (!isLogin && !form.nom) e.nom = 'Nom requis';
+    if (!form.email) { e.email = 'Courriel requis'; }
+    if (!form.motDePasse || form.motDePasse.length < 6) { e.motDePasse = 'Minimum 6 caractères'; }
+    if (!isLogin && !form.nom) { e.nom = 'Nom requis'; }
     setErrors(e);
     return Object.keys(e).length === 0;
   };
 
   const handleSubmit = async () => {
-    if (!validate()) return;
+    if (!validate()) { return; }
     setLoading(true);
     setServerError('');
     try {
@@ -33,9 +33,9 @@ export function AuthModal({ mode, onClose, onLogin, onRegister }) {
       }
     } catch (err) {
       if (err instanceof ApiError) {
-        if (err.status === 401) setServerError('Identifiants incorrects.');
-        else if (err.status === 409) setServerError('Un compte existe déjà avec cet email.');
-        else setServerError(err.message || 'Une erreur est survenue.');
+        if (err.status === 401) { setServerError('Identifiants incorrects.'); }
+        else if (err.status === 409) { setServerError('Un compte existe déjà avec cet email.'); }
+        else { setServerError(err.message || 'Une erreur est survenue.'); }
       } else {
         setServerError('Impossible de joindre le serveur.');
       }
@@ -45,7 +45,11 @@ export function AuthModal({ mode, onClose, onLogin, onRegister }) {
   };
 
   const handleOverlayClick = (e) => {
-    if (e.target === e.currentTarget) onClose();
+    if (e.target === e.currentTarget) { onClose(); }
+  };
+
+  const handleOverlayKeyDown = (e) => {
+    if (e.key === 'Escape') { onClose(); }
   };
 
   const field = (key, label, type = 'text', placeholder = '') => (
@@ -70,7 +74,9 @@ export function AuthModal({ mode, onClose, onLogin, onRegister }) {
   return (
     <div
       className="modal-overlay"
+      role="presentation"
       onClick={handleOverlayClick}
+      onKeyDown={handleOverlayKeyDown}
     >
       <div
         className="modal"

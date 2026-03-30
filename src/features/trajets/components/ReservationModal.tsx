@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import type { MatchingResponse } from '@/shared/types/trajet';
 import { formatHeure } from '../utils/formatters';
 
@@ -23,12 +23,16 @@ export function ReservationModal({ trajet, onClose, onConfirm }: ReservationModa
   };
 
   const handleOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) onClose();
+    if (e.target === e.currentTarget) { onClose(); }
+  };
+
+  const handleOverlayKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Escape') { onClose(); }
   };
 
   return (
-    <div className="modal-overlay" role="dialog" aria-modal="true" onClick={handleOverlay}>
-      <div className="modal">
+    <div className="modal-overlay" role="presentation" onClick={handleOverlay} onKeyDown={handleOverlayKeyDown}>
+      <div className="modal" role="dialog" aria-modal="true">
         <button className="modal-close" onClick={onClose} aria-label="Fermer">✕</button>
 
         <div className="modal-title">Confirmer la réservation</div>

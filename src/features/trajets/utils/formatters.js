@@ -4,7 +4,7 @@
  * @returns {string}
  */
 export function formatHeure(heureIso) {
-  if (!heureIso) return '';
+  if (!heureIso) { return ''; }
   const [h, m] = heureIso.split(':');
   return `${h}h${m}`;
 }
@@ -15,7 +15,7 @@ export function formatHeure(heureIso) {
  * @returns {string}
  */
 export function formatDate(dateIso) {
-  if (!dateIso) return '';
+  if (!dateIso) { return ''; }
   return new Date(dateIso).toLocaleDateString('fr-CA', {
     day: 'numeric',
     month: 'short',

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useCreateTrajet } from '@/shared/hooks/useCreateTrajet';
 import { JOURS_LABELS, JOUR_LABEL_TO_ENUM } from '@/shared/constants/jours';
 import type { TrajetCreateRequest, TrajetType, JourSemaine } from '@/shared/types/trajet';
@@ -65,22 +65,22 @@ export function CreateTrajetModal({ token, onClose, onSuccess }: CreateTrajetMod
   const validate = (): boolean => {
     const e: FormErrors = {};
 
-    if (!form.depart.trim()) e.depart = 'Ville de départ requise';
-    if (!form.destination.trim()) e.destination = 'Destination requise';
-    if (!form.heure) e.heure = 'Heure requise';
+    if (!form.depart.trim()) { e.depart = 'Ville de départ requise'; }
+    if (!form.destination.trim()) { e.destination = 'Destination requise'; }
+    if (!form.heure) { e.heure = 'Heure requise'; }
 
     const places = parseInt(form.placesDisponibles, 10);
-    if (isNaN(places) || places < 1) e.placesDisponibles = 'Minimum 1 place';
+    if (isNaN(places) || places < 1) { e.placesDisponibles = 'Minimum 1 place'; }
 
     const prix = parseFloat(form.prixParPassager);
-    if (isNaN(prix) || prix <= 0) e.prixParPassager = 'Prix doit être positif';
+    if (isNaN(prix) || prix <= 0) { e.prixParPassager = 'Prix doit être positif'; }
 
     if (form.type === 'PONCTUEL') {
-      if (!form.date) e.date = 'Date requise pour un trajet ponctuel';
+      if (!form.date) { e.date = 'Date requise pour un trajet ponctuel'; }
     } else {
-      if (form.joursSelectionnes.length === 0) e.jours = 'Sélectionnez au moins un jour';
-      if (!form.dateDebut) e.dateDebut = 'Date de début requise';
-      if (!form.dateFin) e.dateFin = 'Date de fin requise';
+      if (form.joursSelectionnes.length === 0) { e.jours = 'Sélectionnez au moins un jour'; }
+      if (!form.dateDebut) { e.dateDebut = 'Date de début requise'; }
+      if (!form.dateFin) { e.dateFin = 'Date de fin requise'; }
     }
 
     setErrors(e);
@@ -90,7 +90,7 @@ export function CreateTrajetModal({ token, onClose, onSuccess }: CreateTrajetMod
   // ── Soumission ──────────────────────────────────────────────────────────────
 
   const handleSubmit = async () => {
-    if (!validate()) return;
+    if (!validate()) { return; }
 
     // Construire le payload selon le type du backend
     const heureIso = form.heure.length === 5 ? `${form.heure}:00` : form.heure;
@@ -115,7 +115,7 @@ export function CreateTrajetModal({ token, onClose, onSuccess }: CreateTrajetMod
     }
 
     const ok = await submitTrajet(payload, token);
-    if (ok) onSuccess();
+    if (ok) { onSuccess(); }
   };
 
   // ── Toggle jour ─────────────────────────────────────────────────────────────
@@ -130,7 +130,11 @@ export function CreateTrajetModal({ token, onClose, onSuccess }: CreateTrajetMod
   };
 
   const handleOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) onClose();
+    if (e.target === e.currentTarget) { onClose(); }
+  };
+
+  const handleOverlayKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Escape') { onClose(); }
   };
 
   // ── Champ générique ─────────────────────────────────────────────────────────
@@ -169,12 +173,16 @@ export function CreateTrajetModal({ token, onClose, onSuccess }: CreateTrajetMod
   return (
     <div
       className="modal-overlay"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="create-trajet-title"
+      role="presentation"
       onClick={handleOverlay}
+      onKeyDown={handleOverlayKeyDown}
     >
-      <div className="modal create-trajet-modal">
+      <div
+        className="modal create-trajet-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="create-trajet-title"
+      >
         <button className="modal-close" onClick={onClose} aria-label="Fermer" disabled={loading}>
           ✕
         </button>
