@@ -16,20 +16,20 @@ export type TrajetType = 'PONCTUEL' | 'REGULIER';
 export interface TrajetCreateRequest {
   depart: string;
   destination: string;
-  heure: string;              // "HH:mm:ss" ex: "07:00:00"
-  placesDisponibles: number;  // Min 1
-  prixParPassager: number;    // Positive
+  heure: string; // "HH:mm:ss" ex: "07:00:00"
+  placesDisponibles: number; // Min 1
+  prixParPassager: number; // Positive
   type: TrajetType;
   // PONCTUEL
-  date?: string;              // "YYYY-MM-DD"
+  date?: string; // "YYYY-MM-DD"
   // REGULIER
   joursRecurrence?: JourSemaine[];
-  dateDebut?: string;         // "YYYY-MM-DD"
-  dateFin?: string;           // "YYYY-MM-DD"
+  dateDebut?: string; // "YYYY-MM-DD"
+  dateFin?: string; // "YYYY-MM-DD"
 }
 
 export interface ReservationCreateRequest {
-  nombrePlaces: number;       // Min 1
+  nombrePlaces: number; // Min 1
 }
 
 // ─── Responses (miroir de TrajetResponse.java / MatchingResponse.java) ────────

@@ -47,7 +47,9 @@ async function request(path, options = {}, token = null) {
   }
 
   // 204 No Content → pas de body JSON
-  if (res.status === 204 || res.status === 201) { return null; }
+  if (res.status === 204 || res.status === 201) {
+    return null;
+  }
 
   return res.json();
 }
@@ -89,8 +91,12 @@ export const connecter = (data) =>
  */
 export const matchTrajets = ({ depart = '', destination = '', jours = [] }) => {
   const qs = new URLSearchParams();
-  if (depart) { qs.set('depart', depart); }
-  if (destination) { qs.set('destination', destination); }
+  if (depart) {
+    qs.set('depart', depart);
+  }
+  if (destination) {
+    qs.set('destination', destination);
+  }
   jours.forEach((j) => qs.append('jours', j)); // ?jours=LUNDI&jours=MARDI
   return request(`/trajets/match?${qs.toString()}`);
 };
@@ -102,9 +108,15 @@ export const matchTrajets = ({ depart = '', destination = '', jours = [] }) => {
  */
 export const findAllTrajets = ({ depart = '', destination = '', date = '' } = {}) => {
   const qs = new URLSearchParams();
-  if (depart) { qs.set('depart', depart); }
-  if (destination) { qs.set('destination', destination); }
-  if (date) { qs.set('date', date); }
+  if (depart) {
+    qs.set('depart', depart);
+  }
+  if (destination) {
+    qs.set('destination', destination);
+  }
+  if (date) {
+    qs.set('date', date);
+  }
   return request(`/trajets?${qs.toString()}`);
 };
 

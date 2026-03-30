@@ -10,12 +10,7 @@ export function Toast({ message, type = 'info', onClose }) {
   }, [onClose]);
 
   return (
-    <div
-      className={`toast ${type}`}
-      role="alert"
-      aria-live="polite"
-      aria-atomic="true"
-    >
+    <div className={`toast ${type}`} role="alert" aria-live="polite" aria-atomic="true">
       <span aria-hidden="true">{ICONS[type]}</span>
       <span>{message}</span>
     </div>

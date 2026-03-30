@@ -23,17 +23,28 @@ export function ReservationModal({ trajet, onClose, onConfirm }: ReservationModa
   };
 
   const handleOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) { onClose(); }
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
   };
 
   const handleOverlayKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'Escape') { onClose(); }
+    if (e.key === 'Escape') {
+      onClose();
+    }
   };
 
   return (
-    <div className="modal-overlay" role="presentation" onClick={handleOverlay} onKeyDown={handleOverlayKeyDown}>
+    <div
+      className="modal-overlay"
+      role="presentation"
+      onClick={handleOverlay}
+      onKeyDown={handleOverlayKeyDown}
+    >
       <div className="modal" role="dialog" aria-modal="true">
-        <button className="modal-close" onClick={onClose} aria-label="Fermer">✕</button>
+        <button className="modal-close" onClick={onClose} aria-label="Fermer">
+          ✕
+        </button>
 
         <div className="modal-title">Confirmer la réservation</div>
         <div className="modal-sub">
@@ -62,7 +73,9 @@ export function ReservationModal({ trajet, onClose, onConfirm }: ReservationModa
             min={1}
             max={max}
             value={nombrePlaces}
-            onChange={(e) => setNombrePlaces(Math.min(max, Math.max(1, parseInt(e.target.value) || 1)))}
+            onChange={(e) =>
+              setNombrePlaces(Math.min(max, Math.max(1, parseInt(e.target.value) || 1)))
+            }
             disabled={loading}
           />
         </div>
@@ -72,7 +85,9 @@ export function ReservationModal({ trajet, onClose, onConfirm }: ReservationModa
         </div>
 
         <button className="modal-submit" onClick={handleConfirm} disabled={loading}>
-          {loading ? 'Réservation en cours...' : `Réserver ${nombrePlaces} place${nombrePlaces > 1 ? 's' : ''} →`}
+          {loading
+            ? 'Réservation en cours...'
+            : `Réserver ${nombrePlaces} place${nombrePlaces > 1 ? 's' : ''} →`}
         </button>
       </div>
     </div>

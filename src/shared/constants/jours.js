@@ -36,4 +36,5 @@ export const labelsToEnums = (labels) => labels.map((l) => JOUR_LABEL_TO_ENUM[l]
  * @param {string[]} enums - ex. ['LUNDI', 'MERCREDI']
  * @returns {string[]} - ex. ['Lun', 'Mer']
  */
-export const enumsToLabels = (enums) => (enums || []).map((e) => JOUR_ENUM_TO_LABEL[e]).filter(Boolean);
+export const enumsToLabels = (enums) =>
+  (enums || []).map((e) => JOUR_ENUM_TO_LABEL[e]).filter(Boolean);

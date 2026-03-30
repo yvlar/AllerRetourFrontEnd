@@ -67,7 +67,11 @@ export function TrajetCard({ trajet, onReserve }) {
             onClick={() => onReserve(trajet)}
             disabled={trajet.placesRestantes === 0}
             style={{ background: trajet.placesRestantes === 0 ? '#ccc' : status.color }}
-            aria-label={trajet.placesRestantes === 0 ? 'Complet' : `Réserver ${trajet.depart} → ${trajet.destination}`}
+            aria-label={
+              trajet.placesRestantes === 0
+                ? 'Complet'
+                : `Réserver ${trajet.depart} → ${trajet.destination}`
+            }
           >
             {trajet.placesRestantes === 0 ? 'Complet' : 'Réserver →'}
           </button>

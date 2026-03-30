@@ -6,7 +6,7 @@ import { connecter, inscrire, ApiError } from '@/shared/services/api';
  * Le token JWT est conservé en mémoire (pas de localStorage).
  */
 export function useAuth() {
-  const [user, setUser] = useState(null);   // { email, prenom, initiales }
+  const [user, setUser] = useState(null); // { email, prenom, initiales }
   const [token, setToken] = useState(null); // JWT string
 
   const login = useCallback(async ({ email, motDePasse }) => {
@@ -18,11 +18,14 @@ export function useAuth() {
     return { prenom };
   }, []);
 
-  const register = useCallback(async ({ nom, email, motDePasse }) => {
-    await inscrire({ nom, email, motDePasse });
-    // Connexion automatique après inscription
-    return login({ email, motDePasse });
-  }, [login]);
+  const register = useCallback(
+    async ({ nom, email, motDePasse }) => {
+      await inscrire({ nom, email, motDePasse });
+      // Connexion automatique après inscription
+      return login({ email, motDePasse });
+    },
+    [login]
+  );
 
   const logout = useCallback(() => {
     setUser(null);

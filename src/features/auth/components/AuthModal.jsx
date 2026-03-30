@@ -14,15 +14,23 @@ export function AuthModal({ mode, onClose, onLogin, onRegister }) {
 
   const validate = () => {
     const e = {};
-    if (!form.email) { e.email = 'Courriel requis'; }
-    if (!form.motDePasse || form.motDePasse.length < 6) { e.motDePasse = 'Minimum 6 caractères'; }
-    if (!isLogin && !form.nom) { e.nom = 'Nom requis'; }
+    if (!form.email) {
+      e.email = 'Courriel requis';
+    }
+    if (!form.motDePasse || form.motDePasse.length < 6) {
+      e.motDePasse = 'Minimum 6 caractères';
+    }
+    if (!isLogin && !form.nom) {
+      e.nom = 'Nom requis';
+    }
     setErrors(e);
     return Object.keys(e).length === 0;
   };
 
   const handleSubmit = async () => {
-    if (!validate()) { return; }
+    if (!validate()) {
+      return;
+    }
     setLoading(true);
     setServerError('');
     try {
@@ -33,9 +41,13 @@ export function AuthModal({ mode, onClose, onLogin, onRegister }) {
       }
     } catch (err) {
       if (err instanceof ApiError) {
-        if (err.status === 401) { setServerError('Identifiants incorrects.'); }
-        else if (err.status === 409) { setServerError('Un compte existe déjà avec cet email.'); }
-        else { setServerError(err.message || 'Une erreur est survenue.'); }
+        if (err.status === 401) {
+          setServerError('Identifiants incorrects.');
+        } else if (err.status === 409) {
+          setServerError('Un compte existe déjà avec cet email.');
+        } else {
+          setServerError(err.message || 'Une erreur est survenue.');
+        }
       } else {
         setServerError('Impossible de joindre le serveur.');
       }
@@ -45,16 +57,22 @@ export function AuthModal({ mode, onClose, onLogin, onRegister }) {
   };
 
   const handleOverlayClick = (e) => {
-    if (e.target === e.currentTarget) { onClose(); }
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
   };
 
   const handleOverlayKeyDown = (e) => {
-    if (e.key === 'Escape') { onClose(); }
+    if (e.key === 'Escape') {
+      onClose();
+    }
   };
 
   const field = (key, label, type = 'text', placeholder = '') => (
     <div className="modal-field">
-      <label className="modal-label" htmlFor={key}>{label}</label>
+      <label className="modal-label" htmlFor={key}>
+        {label}
+      </label>
       <input
         id={key}
         className="modal-input"
@@ -65,9 +83,7 @@ export function AuthModal({ mode, onClose, onLogin, onRegister }) {
         autoComplete={key === 'motDePasse' ? (isLogin ? 'current-password' : 'new-password') : key}
         disabled={loading}
       />
-      {errors[key] && (
-        <span style={{ color: '#EB5757', fontSize: '0.75rem' }}>{errors[key]}</span>
-      )}
+      {errors[key] && <span style={{ color: '#EB5757', fontSize: '0.75rem' }}>{errors[key]}</span>}
     </div>
   );
 
@@ -78,12 +94,7 @@ export function AuthModal({ mode, onClose, onLogin, onRegister }) {
       onClick={handleOverlayClick}
       onKeyDown={handleOverlayKeyDown}
     >
-      <div
-        className="modal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="modal-title"
-      >
+      <div className="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <button className="modal-close" onClick={onClose} aria-label="Fermer" disabled={loading}>
           ✕
         </button>
@@ -102,11 +113,17 @@ export function AuthModal({ mode, onClose, onLogin, onRegister }) {
         {field('motDePasse', 'Mot de passe', 'password', '••••••••')}
 
         {serverError && (
-          <div style={{
-            color: '#b91c1c', background: 'rgba(235,87,87,0.1)',
-            border: '1px solid rgba(235,87,87,0.3)', borderRadius: 8,
-            padding: '10px 14px', fontSize: '0.85rem', marginBottom: '0.5rem'
-          }}>
+          <div
+            style={{
+              color: '#b91c1c',
+              background: 'rgba(235,87,87,0.1)',
+              border: '1px solid rgba(235,87,87,0.3)',
+              borderRadius: 8,
+              padding: '10px 14px',
+              fontSize: '0.85rem',
+              marginBottom: '0.5rem',
+            }}
+          >
             {serverError}
           </div>
         )}
@@ -119,14 +136,26 @@ export function AuthModal({ mode, onClose, onLogin, onRegister }) {
           {isLogin ? (
             <>
               Pas encore de compte ?{' '}
-              <button type="button" onClick={() => { setIsLogin(false); setServerError(''); }}>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsLogin(false);
+                  setServerError('');
+                }}
+              >
                 S&apos;inscrire
               </button>
             </>
           ) : (
             <>
               Déjà un compte ?{' '}
-              <button type="button" onClick={() => { setIsLogin(true); setServerError(''); }}>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsLogin(true);
+                  setServerError('');
+                }}
+              >
                 Se connecter
               </button>
             </>

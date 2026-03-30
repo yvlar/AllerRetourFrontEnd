@@ -54,5 +54,13 @@ export function useSearch() {
     setError(null);
   }, []);
 
-  return { searchResults, searchQuery, loading, error, handleSearch, handleSelectRoute, resetSearch };
+  return {
+    searchResults,
+    searchQuery,
+    loading,
+    error,
+    handleSearch,
+    handleSelectRoute,
+    resetSearch,
+  };
 }

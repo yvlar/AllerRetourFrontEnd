@@ -85,4 +85,3 @@ export const MOCK_TRAJETS = [
     dateFin: '2025-06-20',
   },
 ];
-

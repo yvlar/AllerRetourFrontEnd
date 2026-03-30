@@ -15,7 +15,7 @@ interface FormState {
   // PONCTUEL
   date: string;
   // REGULIER
-  joursSelectionnes: string[];  // labels UI ex: ['Lun', 'Mer']
+  joursSelectionnes: string[]; // labels UI ex: ['Lun', 'Mer']
   dateDebut: string;
   dateFin: string;
 }
@@ -65,22 +65,40 @@ export function CreateTrajetModal({ token, onClose, onSuccess }: CreateTrajetMod
   const validate = (): boolean => {
     const e: FormErrors = {};
 
-    if (!form.depart.trim()) { e.depart = 'Ville de départ requise'; }
-    if (!form.destination.trim()) { e.destination = 'Destination requise'; }
-    if (!form.heure) { e.heure = 'Heure requise'; }
+    if (!form.depart.trim()) {
+      e.depart = 'Ville de départ requise';
+    }
+    if (!form.destination.trim()) {
+      e.destination = 'Destination requise';
+    }
+    if (!form.heure) {
+      e.heure = 'Heure requise';
+    }
 
     const places = parseInt(form.placesDisponibles, 10);
-    if (isNaN(places) || places < 1) { e.placesDisponibles = 'Minimum 1 place'; }
+    if (isNaN(places) || places < 1) {
+      e.placesDisponibles = 'Minimum 1 place';
+    }
 
     const prix = parseFloat(form.prixParPassager);
-    if (isNaN(prix) || prix <= 0) { e.prixParPassager = 'Prix doit être positif'; }
+    if (isNaN(prix) || prix <= 0) {
+      e.prixParPassager = 'Prix doit être positif';
+    }
 
     if (form.type === 'PONCTUEL') {
-      if (!form.date) { e.date = 'Date requise pour un trajet ponctuel'; }
+      if (!form.date) {
+        e.date = 'Date requise pour un trajet ponctuel';
+      }
     } else {
-      if (form.joursSelectionnes.length === 0) { e.jours = 'Sélectionnez au moins un jour'; }
-      if (!form.dateDebut) { e.dateDebut = 'Date de début requise'; }
-      if (!form.dateFin) { e.dateFin = 'Date de fin requise'; }
+      if (form.joursSelectionnes.length === 0) {
+        e.jours = 'Sélectionnez au moins un jour';
+      }
+      if (!form.dateDebut) {
+        e.dateDebut = 'Date de début requise';
+      }
+      if (!form.dateFin) {
+        e.dateFin = 'Date de fin requise';
+      }
     }
 
     setErrors(e);
@@ -90,7 +108,9 @@ export function CreateTrajetModal({ token, onClose, onSuccess }: CreateTrajetMod
   // ── Soumission ──────────────────────────────────────────────────────────────
 
   const handleSubmit = async () => {
-    if (!validate()) { return; }
+    if (!validate()) {
+      return;
+    }
 
     // Construire le payload selon le type du backend
     const heureIso = form.heure.length === 5 ? `${form.heure}:00` : form.heure;
@@ -115,7 +135,9 @@ export function CreateTrajetModal({ token, onClose, onSuccess }: CreateTrajetMod
     }
 
     const ok = await submitTrajet(payload, token);
-    if (ok) { onSuccess(); }
+    if (ok) {
+      onSuccess();
+    }
   };
 
   // ── Toggle jour ─────────────────────────────────────────────────────────────
@@ -130,11 +152,15 @@ export function CreateTrajetModal({ token, onClose, onSuccess }: CreateTrajetMod
   };
 
   const handleOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) { onClose(); }
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
   };
 
   const handleOverlayKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'Escape') { onClose(); }
+    if (e.key === 'Escape') {
+      onClose();
+    }
   };
 
   // ── Champ générique ─────────────────────────────────────────────────────────
@@ -190,9 +216,7 @@ export function CreateTrajetModal({ token, onClose, onSuccess }: CreateTrajetMod
         <div id="create-trajet-title" className="modal-title">
           Proposer un trajet
         </div>
-        <div className="modal-sub">
-          Renseignez les informations de votre trajet.
-        </div>
+        <div className="modal-sub">Renseignez les informations de votre trajet.</div>
 
         {/* ── Départ / Destination ── */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
@@ -228,7 +252,9 @@ export function CreateTrajetModal({ token, onClose, onSuccess }: CreateTrajetMod
         {/* ── Champs PONCTUEL ── */}
         {form.type === 'PONCTUEL' && (
           <div className="modal-field">
-            <label className="modal-label" htmlFor="date">Date du trajet</label>
+            <label className="modal-label" htmlFor="date">
+              Date du trajet
+            </label>
             <input
               id="date"
               className="modal-input"
@@ -269,7 +295,9 @@ export function CreateTrajetModal({ token, onClose, onSuccess }: CreateTrajetMod
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
               <div className="modal-field">
-                <label className="modal-label" htmlFor="dateDebut">Date de début</label>
+                <label className="modal-label" htmlFor="dateDebut">
+                  Date de début
+                </label>
                 <input
                   id="dateDebut"
                   className="modal-input"
@@ -283,7 +311,9 @@ export function CreateTrajetModal({ token, onClose, onSuccess }: CreateTrajetMod
                 )}
               </div>
               <div className="modal-field">
-                <label className="modal-label" htmlFor="dateFin">Date de fin</label>
+                <label className="modal-label" htmlFor="dateFin">
+                  Date de fin
+                </label>
                 <input
                   id="dateFin"
                   className="modal-input"
@@ -301,16 +331,10 @@ export function CreateTrajetModal({ token, onClose, onSuccess }: CreateTrajetMod
         )}
 
         {/* ── Erreur serveur ── */}
-        {serverError && (
-          <div className="server-error-banner">{serverError}</div>
-        )}
+        {serverError && <div className="server-error-banner">{serverError}</div>}
 
         {/* ── Submit ── */}
-        <button
-          className="modal-submit"
-          onClick={handleSubmit}
-          disabled={loading}
-        >
+        <button className="modal-submit" onClick={handleSubmit} disabled={loading}>
           {loading ? 'Publication en cours...' : 'Publier le trajet →'}
         </button>
       </div>

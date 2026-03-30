@@ -351,7 +351,13 @@ body {
 .road-dash {
   flex: 1;
   height: 2px;
-  background: repeating-linear-gradient(90deg, #d0d0d0, #d0d0d0 8px, transparent 8px, transparent 16px);
+  background: repeating-linear-gradient(
+    90deg,
+    #d0d0d0,
+    #d0d0d0 8px,
+    transparent 8px,
+    transparent 16px
+  );
 }
 
 /* ───── Routes grid ───── */
@@ -366,7 +372,9 @@ body {
   border-radius: 14px;
   padding: 1.25rem 1.5rem;
   cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
   border: 1.5px solid #eee;
   position: relative;
   overflow: hidden;
@@ -496,7 +504,9 @@ body {
   background: var(--c-white);
   border-radius: 14px;
   border: 1.5px solid #e8ede8;
-  transition: box-shadow 0.15s, border-color 0.15s;
+  transition:
+    box-shadow 0.15s,
+    border-color 0.15s;
   cursor: pointer;
   display: flex;
   overflow: hidden;
