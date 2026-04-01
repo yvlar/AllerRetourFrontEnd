@@ -276,11 +276,6 @@ allerretour-frontend/
 
 ---
 
-## 👤 Auteur
-
-Développé dans le cadre du cours **GLO-2004** à l'Université Laval.
-
----
 
 ## 📄 Licence
 
